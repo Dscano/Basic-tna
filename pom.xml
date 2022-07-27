@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2020-present Open Networking Foundation
+SPDX-License-Identifier: Apache-2.0
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.onosproject</groupId>
+        <artifactId>onos-dependencies</artifactId>
+        <version>3.0.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>org.stratumproject</groupId>
+    <artifactId>basic-tna</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>bundle</packaging>
+
+    <description>
+        Pipeconf to use Basic with Barefoot Tofino-based devices
+    </description>
+    <url>https://www.stratumproject.org</url>
+
+   <properties>
+        <onos.app.name>org.basic.app</onos.app.name>
+        <api.version>1.0.0</api.version>
+        <onos.app.title>Basic-Tna</onos.app.title>
+        <onos.app.origin>SSSA</onos.app.origin>
+        <onos.app.category>Traffic-Forwarding</onos.app.category>
+        <onos.app.url>http://onosproject.org</onos.app.url>
+        <onos.app.readme>ONOS OSGi bundle archetype.</onos.app.readme>
+       <!--<web.context>/onos/basictna</web.context>-->
+   </properties>
+
+<dependencies>
+       <dependency>
+           <groupId>org.onosproject</groupId>
+           <artifactId>onos-api</artifactId>
+           <version>${onos.version}</version>
+           <scope>provided</scope>
+       </dependency>
+
+       <dependency>
+           <groupId>org.onosproject</groupId>
+           <artifactId>onlab-osgi</artifactId>
+           <version>${onos.version}</version>
+           <scope>provided</scope>
+       </dependency>
+
+       <dependency>
+           <groupId>org.onosproject</groupId>
+           <artifactId>onlab-misc</artifactId>
+           <version>${onos.version}</version>
+           <scope>provided</scope>
+       </dependency>
+
+       <dependency>
+           <groupId>org.onosproject</groupId>
+           <artifactId>onos-api</artifactId>
+           <version>${onos.version}</version>
+           <scope>test</scope>
+           <classifier>tests</classifier>
+       </dependency>
+
+       <dependency>
+     <groupId>org.onosproject</groupId>
+     <artifactId>onos-cli</artifactId>
+     <version>${onos.version}</version>
+     <scope>provided</scope>
+   </dependency>
+
+    <dependency>
+           <groupId>org.onosproject</groupId>
+           <artifactId>onos-protocols-p4runtime-api</artifactId>
+           <version>${onos.version}</version>
+           <scope>provided</scope>
+       </dependency>
+
+       <dependency>
+           <groupId>org.onosproject</groupId>
+           <artifactId>onos-drivers-p4runtime</artifactId>
+           <version>${onos.version}</version>
+           <scope>provided</scope>
+       </dependency>
+
+       <dependency>
+           <groupId>org.onosproject</groupId>
+           <artifactId>onos-protocols-p4runtime-model</artifactId>
+           <version>${onos.version}</version>
+           <scope>provided</scope>
+       </dependency>
+
+       <dependency>
+     <groupId>org.apache.karaf.shell</groupId>
+     <artifactId>org.apache.karaf.shell.console</artifactId>
+     <scope>provided</scope>
+   </dependency>
+
+       <dependency>
+     <groupId>javax.ws.rs</groupId>
+     <artifactId>javax.ws.rs-api</artifactId>
+     <scope>provided</scope>
+   </dependency>
+
+       <dependency>
+     <groupId>com.fasterxml.jackson.core</groupId>
+     <artifactId>jackson-annotations</artifactId>
+     <scope>provided</scope>
+   </dependency>
+
+       <dependency>
+     <groupId>org.glassfish.jersey.containers</groupId>
+     <artifactId>jersey-container-servlet</artifactId>
+     <scope>provided</scope>
+   </dependency>
+
+   <dependency>
+     <groupId>com.fasterxml.jackson.core</groupId>
+     <artifactId>jackson-databind</artifactId>
+     <scope>provided</scope>
+   </dependency>
+
+   </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.onosproject</groupId>
+                <artifactId>onos-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Include-Resource>
+                            {maven-resources}
+                        </Include-Resource>
+                        <Bundle-SymbolicName>
+                            ${project.groupId}.${project.artifactId}
+                        </Bundle-SymbolicName>
+                        <Import-Package>
+                            *,org.glassfish.jersey.servlet
+                        </Import-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <configuration>
+                    <excludes>**/P4InfoConstants.java</excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Central Repository</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </releases>
+        </repository>
+        <repository>
+            <id>snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </snapshots>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <profiles>
+        <profile>
+            <id>coverage</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/P4InfoConstants.java</exclude>
+                            </excludes>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>prepare-agent</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>report</id>
+                                <phase>test</phase>
+                                <goals>
+                                    <goal>report</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+
+</project>
+

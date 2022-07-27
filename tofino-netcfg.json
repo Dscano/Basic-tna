@@ -1,0 +1,11 @@
+{
+  "devices": {
+    "device:stratum:10.30.2.53": {
+      "basic": {
+        "managementAddress": "grpc://10.30.2.53:9559?device_id=1",
+        "driver": "stratum-tofino",
+        "pipeconf": "org.stratumproject.basic.montara_sde_9_7_0"
+      }
+    }
+  }
+}
